@@ -1,49 +1,39 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Task 1: Read in the Iris dataset
-# The rubric specifies using Pandas functions.
-try:
-    iris = pd.read_csv('iris.data', header=None)
-except FileNotFoundError:
-    print("Error: iris.data not found. Please place it in the same directory as the script.")
-    exit()
+# Task 1: Read the Iris dataset using Pandas
+iris = pd.read_csv('iris.data', header=None)  # No error handling for simplicity
 
-# Adding column names based on iris.names.txt for better readability
+# Names of columns
 iris.columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
 
 # Task 2: Calculate and print the number of rows and columns
-# Using Pandas attributes for efficiency as per the rubric
-num_rows = iris.shape[0]
-num_cols = iris.shape[1]
+num_rows, num_cols = iris.shape 
 print(f"Number of rows: {num_rows}")
 print(f"Number of columns: {num_cols}")
 
 # Task 3: Get all values of the last column and print distinct values
-# Using Pandas for efficiency
-last_column = iris.iloc[:, -1]
-distinct_values = last_column.unique()
+last_column_values = iris.iloc[:, -1].values 
+distinct_values = set(last_column_values) 
 print(f"Distinct values in the last column: {', '.join(distinct_values)}")
 
 # Task 4: Calculations for "Iris-setosa"
-# Filtering with Pandas for efficiency
+# Using boolean to filter
 iris_setosa = iris[iris['class'] == 'Iris-setosa']
 
 # Calculations
-num_rows_setosa = iris_setosa.shape[0]
+num_rows_setosa = len(iris_setosa)
 avg_sepal_length = iris_setosa['sepal_length'].mean()
 max_sepal_width = iris_setosa['sepal_width'].max()
 min_petal_length = iris_setosa['petal_length'].min()
-
+# Printing to terminal
 print(f"Calculations for Iris-setosa:")
 print(f"  Number of rows: {num_rows_setosa}")
 print(f"  Average sepal length: {avg_sepal_length}")
 print(f"  Maximum sepal width: {max_sepal_width}")
 print(f"  Minimum petal length: {min_petal_length}")
 
-# Task 5: Scatter plot
-# Using Pandas and Matplotlib for plotting
-# Creating color and marker maps for better visualization
+# Task 5: Scatter plot with colors and shapes
 colors = {'Iris-setosa': 'red', 'Iris-versicolor': 'green', 'Iris-virginica': 'blue'}
 markers = {'Iris-setosa': 'o', 'Iris-versicolor': 's', 'Iris-virginica': 'D'}
 
